@@ -1,0 +1,16 @@
+stages:
+  - start_main
+
+
+run_main:
+  stage: start_main
+  before_script:
+    - mv config/browsers.json /home/gitlab-runner/selenoid/
+  script:
+    - docker compose down
+    - docker compose up -d
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+      when: manual
+  tags:
+    - linux_qa_selenoid

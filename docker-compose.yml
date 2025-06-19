@@ -1,0 +1,34 @@
+version: '3.5'
+
+name: selenoid_stack
+
+services:
+  selenoid:
+    image: "aerokube/selenoid"
+    container_name: selenoid
+    network_mode: bridge
+    ports:
+      - "4444:4444"
+    volumes:
+      - "/Users/zzzz/PycharmProjects/selenoid_configuration/selenoid:/etc/selenoid/"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    command: ["-session-attempt-timeout", "10m", "-service-startup-timeout", "10m", "-timeout", "10m", "-max-timeout", "20m0s", "-limit", "5"]
+    restart: always
+
+  selenoid-ui:
+    image: "aerokube/selenoid-ui"
+    container_name: selenoid-ui
+    network_mode: bridge
+    links:
+      - selenoid
+    ports:
+      - "8080:8080"
+    command: ["--selenoid-uri", "http://selenoid:4444"]
+    restart: always
+    depends_on:
+      selenoid:
+        condition: service_started
+
+volumes:
+  selenoid:
+    driver: local

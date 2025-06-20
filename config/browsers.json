@@ -9,7 +9,7 @@
                     "/tmp": "size=1g",
                     "/var": "size=1g"
                 },
-                "path": "/wd/hub",
+                "path": "/",
                 "env": ["LANG=ru_RU.UTF-8", "LANGUAGE=ru:en", "LC_ALL=ru_RU.UTF-8", "TZ=Europe/Moscow"],
                 "cpu": "1.0",
                 "mem": "2g",
@@ -27,7 +27,7 @@
         "128.0": {
             "image": "selenoid/chrome:128.0",
             "port": "4444",
-            "path": "/wd/hub",
+            "path": "/",
             "tmpfs": {
                 "/tmp": "size=1g",
                 "/var": "size=1g"
